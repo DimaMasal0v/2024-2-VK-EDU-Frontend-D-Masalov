@@ -19,27 +19,27 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        working-directory: ./ДЗNo2/simple-chat
+        working-directory: ./ДЗ№2/simple-chat
         run: npm install
 
       - name: Build the app
-        working-directory: ./ДЗNo2/simple-chat
+        working-directory: ./ДЗ№2/simple-chat
         run: npm run build
 
       - name: Create docs directory
-        run: mkdir -p ./ДЗNo2/docs
+        run: mkdir -p ./ДЗ№2/docs
 
       - name: Move build to docs
-        run: mv ./ДЗNo2/simple-chat/build/* ./ДЗNo2/docs/
+        run: mv ./ДЗ№2/simple-chat/build/* ./ДЗ№2/docs/
 
       - name: Jekyll Build
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./ДЗNo2/docs
-          destination: ./ДЗNo2/docs/_site
-          
+          source: ./ДЗ№2/docs
+          destination: ./ДЗ№2/docs/_site
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ДЗNo2/docs/_site
+          publish_dir: ./ДЗ№2/docs/_site
