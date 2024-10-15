@@ -1,5 +1,5 @@
 name: GitHub Pages
-run-name: ${{ github.actor }} is rolling out a new version of the app 🚀
+run-name: ${{ github.actor }} is deploying the app 🚀
 
 on:
   push:
@@ -26,17 +26,20 @@ jobs:
         working-directory: ./ДЗ№2/simple-chat
         run: npm run build
 
-      - name: Create docs directory
+      - name: Ensure docs directory exists
         run: mkdir -p ./ДЗ№2/docs
 
       - name: Move build to docs
         run: mv ./ДЗ№2/simple-chat/build/* ./ДЗ№2/docs/
 
-      - name: Jekyll Build
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./ДЗ№2/docs
-          destination: ./ДЗ№2/docs/_site
+      - name: Set up Jekyll environment
+        run: |
+          gem install bundler jekyll
+          bundle install
+
+      - name: Build site with Jekyll
+        run: |
+          jekyll build --source ./ДЗ№2/docs --destination ./ДЗ№2/docs/_site
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
