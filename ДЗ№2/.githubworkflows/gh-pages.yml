@@ -1,48 +1,22 @@
 name: GitHub Pages
-run-name: ${{ github.actor }} is deploying the app 🚀
-
-on:
-  push:
-    branches:
-      - dz2
-
+run-name: ${{ github.actor }} is rolling out a new version of the app 🚀
+on: [push]
 jobs:
   Build-and-Deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      - name: Install dependencies
-        working-directory: ./ДЗ№2/simple-chat
-        run: npm install
-
-      - name: Build the app
-        working-directory: ./ДЗ№2/simple-chat
+      - name: Install npm deps
+        working-directory: ./simple-chat
+        run: npm i
+      - name: Build app
+        working-directory: ./simple-chat
         run: npm run build
-
-      - name: Ensure docs directory exists
-        run: mkdir -p ./ДЗ№2/docs
-
-      - name: Move build to docs
-        run: mv ./ДЗ№2/simple-chat/build/* ./ДЗ№2/docs/
-
-      - name: Set up Jekyll environment
-        run: |
-          gem install bundler jekyll
-          bundle install
-
-      - name: Build site with Jekyll
-        run: |
-          jekyll build --source ./ДЗ№2/docs --destination ./ДЗ№2/docs/_site
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ДЗ№2/docs/_site
+          publish_dir: ./simple-chat/build
