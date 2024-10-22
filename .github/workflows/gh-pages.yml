@@ -1,33 +1,21 @@
 name: GitHub Pages
-run-name: ${{ github.actor }} is deploying a new version of the app 🚀
-
-on:
-  push:
-    branches:
-      - dz3 
-
+run-name: ${{ github.actor }} is rolling out a new version of the app 🚀
+on: [push]
 jobs:
   Build-and-Deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-
-      - name: Install dependencies
+          node-version: 16
+      - name: Install npm deps
         working-directory: ./simple-chat
-        run: npm i 
-
-      - name: Build the app
+        run: npm i
+      - name: Build app
         working-directory: ./simple-chat
         run: npm run build
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
