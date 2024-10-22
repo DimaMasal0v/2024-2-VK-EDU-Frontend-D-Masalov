@@ -57,5 +57,9 @@ messageInput.addEventListener('keypress', (e) => {
     }
 });
 
+function openChat(page) {
+    window.location.href = page;
+}
+
 // Инициализация
 loadMessages();
