@@ -1,0 +1,124 @@
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Основные стили */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-list-container {
+  width: 100%;
+  max-width: 400px;
+  height: 600px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Шапка */
+.header {
+  background-color: #0010ea;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Список чатов */
+.chat-items {
+  padding: 10px;
+  overflow-y: auto;
+  height: calc(100% - 56px);
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.chat-item:hover {
+  background-color: #f0f8ff;
+}
+
+.avatar {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-info {
+  flex-grow: 1;
+}
+
+.chat-name {
+  font-weight: bold;
+}
+
+.chat-message {
+  color: #666;
+  font-size: 14px;
+}
+
+.chat-status {
+  text-align: right;
+}
+
+.time {
+  display: block;
+  font-size: 12px;
+  color: #666;
+}
+
+.status-icon {
+  font-size: 16px;
+  color: #0010ea;
+}
+
+/* Плавающая кнопка "Создать чат" */
+.floating-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0084ff;
+  color: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.floating-button:hover {
+  background-color: #0048ff;
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+      box-shadow: 0 0 0 0 rgba(0, 16, 234, 0.4);
+  }
+  70% {
+      box-shadow: 0 0 0 20px rgba(0, 16, 234, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(0, 16, 234, 0);
+  }
+}
+
