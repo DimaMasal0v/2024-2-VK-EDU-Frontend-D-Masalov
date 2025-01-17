@@ -1,12 +1,12 @@
-import React from 'react';
-import '../App.css';
-
-// Импорт иконок
+import React, { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DoneIcon from '@mui/icons-material/Done';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import EditIcon from '@mui/icons-material/Edit';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 // Данные чатов
 const chatData = [
@@ -102,7 +102,9 @@ const chatData = [
 
 // Компонент списка чатов
 function ChatList({ onSelectChat }) {
-  // Функция для выбора иконки статуса
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
   const getStatusIcon = (status) => {
     switch (status) {
       case 'done':
@@ -118,14 +120,31 @@ function ChatList({ onSelectChat }) {
     <div className="chat-list-container">
       {/* Заголовок */}
       <div className="header">
-        <span className="material-icons back-icon">
+        <div
+          className="menu-icon"
+          onClick={() => setMenuOpen((prev) => !prev)}
+        >
           <MenuIcon />
-        </span>
+        </div>
         <div className="header-title">Messenger</div>
-        <span className="material-icons search-icon">
+        <div className="search-icon">
           <SearchIcon />
-        </span>
+        </div>
       </div>
+
+      {/* Бургер-меню */}
+      {menuOpen && (
+        <div className="burger-menu">
+          <div className="menu-item" onClick={() => navigate('/')}>
+            <MenuIcon />
+            <span>Чаты</span>
+          </div>
+          <div className="menu-item" onClick={() => navigate('/profile')}>
+            <AccountCircleIcon />
+            <span>Профиль</span>
+          </div>
+        </div>
+      )}
 
       {/* Список чатов */}
       <div className="chat-items">
@@ -150,9 +169,7 @@ function ChatList({ onSelectChat }) {
 
       {/* Кнопка создания нового чата */}
       <div className="floating-button">
-        <span className="material-icons">
-          <EditIcon />
-        </span>
+        <EditIcon />
       </div>
     </div>
   );
